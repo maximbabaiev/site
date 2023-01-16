@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header__title">
+            <button class="burger">
+                <img src="{% static 'image/Vector 4.svg' %}" alt="burger" class="burger_line">
+            </button>
+        </div>
+        <div class="category">
+            <p class="p_cate">Categories</p>
+            {% for el in img %}
+            <ul>
+
+                <li><a class="a_categories"><img src="data:image/png;base64,{{ el.base_64 }}" alt="category"
+                                                 class="img_category" title="{{ el.name}}">{{el.description}}</a></li>
+
+
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+</body>
+</html>
