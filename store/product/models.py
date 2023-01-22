@@ -9,10 +9,10 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     base_64 = models.TextField(blank=True)
-    image = models.ImageField(upload_to="store/product/static/image")
+    image = models.ImageField(upload_to="product/static/image")
 
     def __str__(self):
-        return f"{self.name} {self.description}"
+        return f"{self.name}"
 
     def save(self, *args, **kwargs):
         self.base_64 = base64.b64encode(self.image.read()).decode('utf-8')
@@ -23,7 +23,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(upload_to="store/product/static/image")
+    image = models.ImageField(upload_to="product/static/image")
     base64 = models.TextField(blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 

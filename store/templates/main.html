@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="container nav-container">
+            <p class="grocery">Grocery shop</p>
+            <label for=""></label><input class="checkbox" type="checkbox" name="" id=""/>
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <div class="menu-items">
+                <ul class="ul_cat">
+                    <img src="{% static 'image/cate.png' %}" alt="us name" class="list_image"><a href="#">Categories</a>
+                    {% for i in categories %}
+                    <li><a href="http://127.0.0.1:8000">{{ i.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul><img src="{% static 'image/ord.png' %}" alt="us name" class="list_image"><a href="#">My orders</a>
+                </ul>
+                <ul><img src="{% static 'image/buc.png' %}" alt="us name" class="list_image"><a href="#">My Bucket</a>
+                </ul>
+                <ul><img src="{% static 'image/acc.png' %}" alt="us name" class="list_image"><a
+                        href="http://127.0.0.1:8000/account/">Your
+                    Account</a></ul>
+                <br>
+                <ul><a href="#">Help Center</a></ul>
+                <ul><a href="#">Privacy Policy</a></ul>
+                <ul><a href="#">Legal</a></ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="category">
+    <p class="p_cate">Categories</p>
+    {% for el in categories %}
+    <ul>
+        <li class="margin_category"><a class="a_categories"><img src="data:image/png;base64,{{ el.base_64 }}"
+                                                                 alt="category"
+                                                                 class="img_category" title="{{ el.name}}"></a></li>
+    </ul>
+    {% endfor %}
+</div>
+
+
+<section class="section_discount">
+    <div class="discount">
+        <img src="{% static 'image/discount.png' %}" alt="discount">
+        <img src="{% static 'image/discount.png' %}" alt="discount">
+        <img src="{% static 'image/discount.png' %}" alt="discount">
+    </div>
+</section>
+<section class="section_product">
+    {% for category in categories %}
+        <div class="block">
+            <p class="groceries">{{ category.name }}:</p>
+                {% for product in prod %}
+                    {% if product.category == category %}
+                    <div class="in_block">
+                        <img src="data:image/png;base64,{{ product.base64 }}" alt="product" class="img-product" title="{{ product.name }}">
+                        <p>{{ product.description }}</p>
+                        <p>₴ {{ product.price }}</p>
+                        <button class="button_add" type="button">Add</button>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    {% endfor %}
+
+
+
+</section>
+</body>
+</html>

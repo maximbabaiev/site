@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from product.forms import *
-from order.models import *
+from order_u.models import *
 from product.models import *
 
 
@@ -11,26 +11,19 @@ from product.models import *
 
 def category(request):
     context = Category.objects.all()
-    return render(request, template_name='main.html', context={"img": context})
+    context_product = Product.objects.all()
+    return render(request, template_name='main.html', context={"categories": context, "prod": context_product})
 
 
-def products_list(request, category_id):
-    products = Product.objects.filter(category_id=category_id)
-    context = {
-        'products': products,
-    }
-    return render(request, 'products_list.html', context)
+
 
 
 def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            User.obgects.get_orcreate(
-                email=form.cleaned_data['email'],
-                password=form.cleaned_data['password']
-            )
-    else:
-        form = LoginForm()
+    form = LoginForm(request.POST)
+    if form.is_valid():
+        User.objects.get_or_create(
+            email=form.cleaned_data['user_email'],
+            password=form.cleaned_data['password']
+        )
 
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'account.html', {'form': form})

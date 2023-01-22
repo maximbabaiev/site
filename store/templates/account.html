@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="container">
+        <div class="first">
+            <div class="img-m-bottom"><img src="{% static 'image/label_for_login.png' %}" alt="label"></div>
+            <div class="for_form">
+                <form method="post" class="login_form">
+                    {% csrf_token %}
+                    <div class="email_input">
+                        <label>
+                            {{form.user_email}}
+                        </label>
+                    </div>
+                    <div class="password_input">
+                        <label>
+                            {{form.password}}
+                        </label>
+                    </div>
+                    <button type="submit" class="button_login">Login</button>
+                </form>
+                <div class="border_flex">
+                    <span class="left_border"></span>
+                    <span>OR</span>
+                    <span class="left_border"></span>
+                </div>
+                <button type="submit" class="login_with_phone">Login with Phone</button>
+                <p class="create_account"><a href="http://127.0.0.1:8000/">Create account</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
